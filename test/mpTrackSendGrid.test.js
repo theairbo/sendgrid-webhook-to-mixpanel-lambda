@@ -8,6 +8,7 @@ const mpTrackSendGrid = require('../mpTrackSendGrid');
 let sendGridPayload = {
   body: JSON.stringify([
     {
+      "email": "example@test.com",
       "distinct_id": 123,
       "organization_id": 32,
       "organization_size": "enterprise",
@@ -20,6 +21,7 @@ let sendGridPayload = {
       "sg_message_id": "14c5d75ce93.dfd.64b469.filter0001.16648.5515E0B88.0"
     },
     {
+      "email": "example_2@test.com",
       "distinct_id": 456,
       "organization_id": 122,
       "organization_size": "smb",
@@ -73,6 +75,8 @@ describe('mpTrackSendGrid', function() {
     let props_1 = args_1[1];
 
     expect(args_1[0]).to.equal("SendGrid: " + event_1.event);
+    expect(props_1.email).to.equal(undefined);
+    expect(props_1.user_email).to.equal(event_1.user_email);
     expect(props_1.category).to.equal(event_1.category);
     expect(props_1.sg_event_id).to.equal(event_1.sg_event_id);
     expect(props_1.sg_message_id).to.equal(event_1.sg_message_id);
@@ -82,6 +86,8 @@ describe('mpTrackSendGrid', function() {
     let props_2 = args_2[1];
 
     expect(args_2[0]).to.equal("SendGrid: " + event_2.event);
+    expect(props_2.email).to.equal(undefined);
+    expect(props_2.user_email).to.equal(event_2.user_email);
     expect(props_2.category).to.equal(event_2.category);
     expect(props_2.sg_event_id).to.equal(event_2.sg_event_id);
     expect(props_2.sg_message_id).to.equal(event_2.sg_message_id);

@@ -8,6 +8,7 @@ function handler(event, context, callback) {
   let eventsTracked = 0;
 
   body.forEach((sendGridEvent) => {
+    delete(sendGridEvent.email);
     mixpanel.track('SendGrid: ' + sendGridEvent.event, sendGridEvent);
     eventsTracked += 1;
   });
